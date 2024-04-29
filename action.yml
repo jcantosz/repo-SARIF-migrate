@@ -1,0 +1,57 @@
+name: "Repo Sarif Migrator"
+description: "An action to move a repository's SARIF files to another repo"
+inputs:
+  # Vars for where to move sarifs from and to
+  source_org:
+    description: "Source org to migrate SARIF files from"
+    required: true
+  source_repo:
+    description: "Source repo to migrate SARIF files from"
+    required: true
+  target_org:
+    description: "Target org to migrate SARIF files to"
+    required: true
+  target_repo:
+    description: "Target repo to migrate SARIF files to"
+    required: true
+
+  source_github_api_url:
+    description: "Source GitHub API URL"
+    required: false
+    default: "https://api.github.com"
+  target_github_api_url:
+    description: "Target GitHub API URL"
+    required: false
+    default: "https://api.github.com"
+
+  # If Using PAT
+  source_github_pat:
+    description: "Personal access token if using that to auth instead of an app"
+    required: false
+  target_github_pat:
+    description: "Personal access token if using that to auth instead of an app"
+    required: false
+
+  # If using GitHub App
+  source_github_app_id:
+    description: "Source GitHub App ID"
+    required: false
+  source_github_app_private_key:
+    description: "Source GitHub App private key"
+    required: false
+  source_github_app_installation_id:
+    description: "Source GitHub App installation ID"
+    required: false
+  target_github_app_id:
+    description: "Target GitHub App ID"
+    required: false
+  target_github_app_private_key:
+    description: "Target GitHub App private key"
+    required: false
+  target_github_app_installation_id:
+    description: "Target GitHub App installation ID"
+    required: false
+
+runs:
+  using: "node20"
+  main: "dist/index.js"
