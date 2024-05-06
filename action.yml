@@ -2,18 +2,18 @@ name: "Repo Sarif Migrator"
 description: "An action to move a repository's SARIF files to another repo"
 inputs:
   # Vars for where to move sarifs from and to
-  source_org:
-    description: "Source org to migrate SARIF files from"
-    required: true
-  source_repo:
+  # source_org:
+  #   description: "Source org to migrate SARIF files from"
+  #   required: true
+  source_repo_url:
     description: "Source repo to migrate SARIF files from"
     required: true
   target_org:
     description: "Target org to migrate SARIF files to"
     required: true
-  target_repo:
-    description: "Target repo to migrate SARIF files to"
-    required: true
+  # target_repo:
+  #   description: "Target repo to migrate SARIF files to"
+  #   required: true
 
   source_github_api_url:
     description: "Source GitHub API URL"

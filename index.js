@@ -13,10 +13,10 @@ const { fail } = require("assert");
 const { default: test } = require("node:test");
 
 // Source and target
-const sourceOrg = core.getInput("source_org");
-const sourceRepo = core.getInput("source_repo");
+//const sourceOrg = core.getInput("source_org");
+const sourceRepoUrl = core.getInput("source_repo_url");
 const targetOrg = core.getInput("target_org");
-const targetRepo = core.getInput("target_repo");
+//const targetRepo = core.getInput("target_repo");
 
 // Settings for Octokit
 // source
@@ -168,7 +168,12 @@ async function uploadSarifFile(octokit, owner, repo, commit_sha, ref, sarif) {
   });
 }
 
-async function main(sourceOctokit, sourceOrg, sourceRepo, targetOctokit, targetOrg, targetRepo) {
+async function main(sourceOctokit, sourceRepoUrl, targetOctokit, targetOrg) {
+  const splitSourceUrl = sourceRepoUrl.split("/").splice(-2);
+  const sourceOrg = splitSourceUrl[0];
+  const sourceRepo = splitSourceUrl[1];
+  const targetRepo = sourceRepo;
+
   core.info(`Processing SARIF files from repo "${sourceOrg}/${sourceRepo}"`);
   var data = await listRepoSarifFiles(sourceOctokit, sourceOrg, sourceRepo);
 
@@ -202,4 +207,4 @@ async function main(sourceOctokit, sourceOrg, sourceRepo, targetOctokit, targetO
   }
 }
 
-main(sourceOctokit, sourceOrg, sourceRepo, targetOctokit, targetOrg, targetRepo);
+main(sourceOctokit, sourceRepoUrl, targetOctokit, targetOrg);
